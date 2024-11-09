@@ -11,6 +11,12 @@ class Program
 {
     static async Task<int> Main(string[] args)
     {
+        if (args.Length == 0) 
+        {
+            NoArgs();
+            return 0;
+        }
+
         var fileOption = new Option<FileInfo?>(
             name: "--file",
             description: "The file to read and display on the console.");
@@ -23,12 +29,7 @@ class Program
                 ReadFile(file!); 
             },
             fileOption);
-            
-        if (args.Length == 0) 
-        {
-            NoArgs();
-            return 0;
-        }
+
         return await rootCommand.InvokeAsync(args);
     }
 
